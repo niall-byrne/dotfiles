@@ -6,9 +6,6 @@ alias _projects="cd ~/Projects"
 # Grep
 alias cgrep="grep --color=always"
 
-# Update Config Repo
-alias update_config="cd ~/.confighome && git stage . && git commit"
-
 # Column Manipulation Shortcuts
 for i in {1..10}; do alias "a$i"="awk '{ print $`echo ${i}` }'"; done
 for i in {1..10}; do alias "c$i"="cut -d, -f`echo ${i}`"; done
