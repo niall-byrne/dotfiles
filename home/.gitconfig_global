@@ -1,0 +1,13 @@
+# This is Git's per-user configuration file.
+[alias]
+  unstage = reset -q HEAD --
+[push]
+  default = simple
+[color]
+  ui = 1
+[core]
+  editor = vim
+  excludesfile = ~/.gitignore_global
+[user]
+  email = niall@niallcode.com
+  name = Niall Byrne

@@ -45,20 +45,28 @@ On_White='\033[47m'       # White
 
 NC="\033[0m"               # Color Reset
 
+
 # Functions
 function ii()   # Get current host related info.
 {
-    echo -e "${BRed}Hostname:$NC" && hostname && uname -a
+
+    source ${HOME}/bin/localAddress.sh
+    UPTIME=$(uptime)
+
+    echo -e "${BRed}Hostname:$NC" && hostname
+    echo -e "${BRed}Kernel:$NC" && uname -a
     echo -e "${BRed}Users logged on:$NC " && who | awk '{ print $1 }' | sort --unique
     echo -e "${BRed}Current date :$NC " && date
-    echo -e "${BRed}Machine stats :$NC " && uptime
+    echo -e "${BRed}Uptime :$NC " && trim ${UPTIME} && echo
     echo -e "${BRed}Diskspace :$NC " && df -h | grep disk
-    echo -e "${BRed}Local IP Address :$NC" && trim "`ifconfig | grep inet | grep netmask | grep broadcast`"
-    echo -e "\n${BRed}Network connections :$NC "
-    echo -e "Established Connections:  `netstat -p tcp | grep ESTABLISHED | wc -l`" 
-    echo -e "Listeners for Connectons: `netstat -p tcp | grep LISTEN | wc -l`"
+    echo -e "${BRed}Local IP Address :$NC" && echo "${PRIVATE_IP}"
+    echo -e "${BRed}Public IP Address :$NC" && echo "$(dig TXT +short o-o.myaddr.l.google.com @ns1.google.com | sed 's/"//g')"
+    echo -e "${BRed}Network connections :$NC "
+    echo -e "Established Connections:  $(netstat -np tcp | grep -v unix | grep ESTABLISHED | wc -l)"
+    echo -e "Listeners for Connectons: $(netstat -np tcp  | grep -v unix | grep LISTEN | wc -l)"
     echo
 }
+
 
 function trim() {
     local var="$*"
