@@ -1,7 +1,18 @@
 # Locations
-alias _home="cd ~"
+alias _="cd ~"
 alias _downloads="cd ~/Downloads"
 alias _projects="cd ~/Projects"
+alias _workspace="cd ~/workspace"
+alias _auvenir="cd ~/workspace/Auvenir"
+alias _sensu="cd ~/workspace/Devops-Sensu"
+alias _ansible="cd ~/workspace/Devops-Ansible"
+alias _devops="cd ~/workspace/Devops-Deployment"
+alias _infra="cd ~/workspace/Infrastructure"
+alias _api="cd ~/workspace/Devops-API"
+alias _sandbox="cd ~/workspace/sandbox"
+
+# Editing
+alias v.alias="vi ~/.bash_aliases"
 
 # Grep
 alias cgrep="grep --color=always"
