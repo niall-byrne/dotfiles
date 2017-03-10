@@ -1,18 +1,17 @@
 # Locations
 alias _="cd ~"
-alias _downloads="cd ~/Downloads"
-alias _projects="cd ~/Projects"
 alias _workspace="cd ~/workspace"
-alias _auvenir="cd ~/workspace/Auvenir"
-alias _sensu="cd ~/workspace/Devops-Sensu"
-alias _ansible="cd ~/workspace/Devops-Ansible"
-alias _devops="cd ~/workspace/Devops-Deployment"
-alias _infra="cd ~/workspace/Infrastructure"
-alias _api="cd ~/workspace/Devops-API"
-alias _sandbox="cd ~/workspace/sandbox"
+alias _projects="cd ~/Projects"
+alias _Projects="cd ~/Projects"
+
+# Python
+alias mkvenv="python3.6 -m venv venv"
 
 # Editing
 alias v.alias="vi ~/.bash_aliases"
+alias v.path="vi ~/.bash_path"
+alias v.rc="vi ~/.bashrc"
+alias v.profile="vi ~/.bash_profile"
 
 # Grep
 alias cgrep="grep --color=always"
