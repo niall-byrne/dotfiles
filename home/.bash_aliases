@@ -82,4 +82,16 @@ function trim() {
     echo -n "$var"
 }
 
+# Docker Shortcuts
 
+function d.rm() {
+	containers="$(docker ps -qa)"
+	[[ -z ${containers} ]] && echo "No containers to remove." && return 1 
+	docker rm ${containers} 
+}
+
+function d.rmi() {
+	images="$(docker images -q)"
+	[[ -z ${images} ]] && echo "No images to remove." && return 1
+	docker rmi ${images} 
+}
