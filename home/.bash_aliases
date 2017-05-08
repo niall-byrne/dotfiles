@@ -5,7 +5,8 @@ alias _projects="cd ~/Projects"
 alias _Projects="cd ~/Projects"
 
 # Python
-alias mkvenv="python3.6 -m venv venv"
+alias p.mkvenv="python3.6 -m venv venv"
+alias p.serve="python -m SimpleHTTPServer"
 
 # Editing
 alias v.alias="vi ~/.bash_aliases"
@@ -70,7 +71,7 @@ function ii()   # Get current host related info.
     echo -e "${BRed}Public IP Address :$NC" && echo "$(dig TXT +short o-o.myaddr.l.google.com @ns1.google.com | sed 's/"//g')"
     echo -e "${BRed}Network connections :$NC "
     echo -e "Established Connections:  $(netstat -np tcp | grep -v unix | grep ESTABLISHED | wc -l)"
-    echo -e "Listeners for Connectons: $(netstat -np tcp  | grep -v unix | grep LISTEN | wc -l)"
+    echo -e "Listeners for Connectons: $(netstat -anp tcp  | grep -v unix | grep LISTEN | wc -l)"
     echo
 }
 
@@ -94,4 +95,10 @@ function d.rmi() {
 	images="$(docker images -q)"
 	[[ -z ${images} ]] && echo "No images to remove." && return 1
 	docker rmi ${images} 
+}
+
+function d.stop() {
+	containers="$(docker ps -q)"
+	[[ -z ${containers} ]] && echo "No containers to stop." && return 1
+        docker stop ${containers}	
 }
