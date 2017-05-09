@@ -7,6 +7,11 @@ alias _Projects="cd ~/Projects"
 # Python
 alias p.mkvenv="python3.6 -m venv venv"
 alias p.serve="python -m SimpleHTTPServer"
+alias p.activate=". venv/bin/activate"
+
+# Linux
+alias l.largest="du -a . | sort -n -r | head -n 5"
+alias l.listen="netstat -aLn"
 
 # Editing
 alias v.alias="vi ~/.bash_aliases"
