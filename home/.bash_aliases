@@ -3,11 +3,17 @@ alias _="cd ~"
 alias _workspace="cd ~/workspace"
 alias _projects="cd ~/Projects"
 alias _Projects="cd ~/Projects"
+alias _homeshick="cd ~/.homesick/repos"
+
+# Finder
+alias f.show='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
+alias f.hide='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 
 # Python
 alias p.mkvenv="python3.6 -m venv venv"
 alias p.serve="python -m SimpleHTTPServer"
 alias p.activate=". venv/bin/activate"
+alias p.uuid="python -c 'import uuid; print(uuid.uuid4())'"
 
 # Linux
 alias l.largest="du -a . | sort -n -r | head -n 5"
