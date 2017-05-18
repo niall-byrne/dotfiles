@@ -9,6 +9,10 @@ alias _homeshick="cd ~/.homesick/repos"
 alias f.show='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
 alias f.hide='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 
+# Security
+alias k.add "ssh-add -K"
+alias k.gen "ssh-keygen"
+
 # Python
 alias p.mkvenv="python3.6 -m venv venv"
 alias p.serve="python -m SimpleHTTPServer"
