@@ -9,4 +9,3 @@
 outputfilename=$(echo $1 | sed 's/.enc$//g')
 openssl aes-256-cbc -d -a -in $1 -out ${outputfilename} 
 
-
