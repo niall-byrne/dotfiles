@@ -112,6 +112,12 @@ function d.rmi() {
 	docker rmi ${images} 
 }
 
+function d.empty() {
+	images="$(docker images | grep none | awk '{print $3}')"
+	[[ -z ${images} ]] && echo "No images to remove." && return 1
+	docker rmi ${images} 
+}
+
 function d.stop() {
 	containers="$(docker ps -q)"
 	[[ -z ${containers} ]] && echo "No containers to stop." && return 1
