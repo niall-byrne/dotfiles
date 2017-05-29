@@ -9,5 +9,5 @@
   editor = vim
   excludesfile = ~/.gitignore_global
 [user]
-  email = niall@niallcode.com
+  email = niall@sharedvisionsolutions.com
   name = Niall Byrne
