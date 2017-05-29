@@ -1,2 +1,4 @@
 [include]
 	path = ~/.gitconfig_global
+[core]
+	excludesfile = /Users/niall/.gitignore_global
