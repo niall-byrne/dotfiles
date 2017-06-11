@@ -10,6 +10,9 @@ alias v.path="vi ~/.bash_path"
 alias v.profile="vi ~/.bash_profile"
 alias v.rc="vi ~/.bashrc"
 
+# SSH
+alias c.pirimeter="ssh pi@192.168.2.21 -i ~/.ssh/pirimeter"
+
 # Column Manipulation Shortcuts
 for i in {1..10}; do alias "a$i"="awk '{ print $`echo ${i}` }'"; done
 for i in {1..10}; do alias "c$i"="cut -d, -f`echo ${i}`"; done
@@ -23,6 +26,11 @@ function trim() {
 }
 
 # Docker Shortcuts
+
+function d.quickey() {
+	docker run -it --name quickey $1 sh
+}
+
 function d.rm() {
 	containers="$(docker ps -qa)"
 	[[ -z ${containers} ]] && echo "No containers to remove." && return 1

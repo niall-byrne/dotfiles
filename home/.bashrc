@@ -2,6 +2,15 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+# Detect Platform on Login
+PLATFORM=$(uname -s):$(uname -m)
+
+# Setup Git
+git config --global core.excludesfile ~/.gitignore_global
+
+# Ensure .bash_env is sourced on every login
+[[ -f ~/.bash_env ]] && source ~/.bash_env
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 

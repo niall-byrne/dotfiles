@@ -24,7 +24,7 @@ alias p.uuid="python -c 'import uuid; print(uuid.uuid4())'"
 
 # Linux
 alias l.largest="du -a . | sort -n -r | head -n 5"
-alias l.listen="netstat -aLn"
+alias l.listen="lsof | grep LISTEN"
 
 # Grep
 alias cgrep="grep --color=always"
