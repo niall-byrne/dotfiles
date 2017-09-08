@@ -11,6 +11,9 @@ git config --global core.excludesfile ~/.gitignore_global
 # Ensure .bash_env is sourced on every login
 [[ -f ~/.bash_env ]] && source ~/.bash_env
 
+# Ensure .bash_git_support is sourced
+[[ -f ~/.bash_git_support ]] && source ~/.bash_git_support
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -69,9 +72,9 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1='${git_branch}${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    PS1='${git_branch}${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
 

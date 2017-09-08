@@ -2,6 +2,9 @@
 # Bash Aliases - Cross Platform Aliases and Source Logic
 # ----------------------------------------------------------------
 
+# Networking
+alias n.online="ping -c 3 8.8.8.8"
+
 # Editing
 alias v.alias="vi ~/.bash_aliases"
 alias v.alias_osx="vi ~/.bash_aliases.osx"
@@ -10,8 +13,11 @@ alias v.path="vi ~/.bash_path"
 alias v.profile="vi ~/.bash_profile"
 alias v.rc="vi ~/.bashrc"
 
-# SSH
-alias c.pirimeter="ssh pi@192.168.2.21 -i ~/.ssh/pirimeter"
+# Work
+alias l.vault=". ~/workspace/windscribe/devops-provisioning/docker/credentials"
+
+# File Utils
+alias f.clean="find . -name ".DS_Store"  -exec rm {} \;"
 
 # Column Manipulation Shortcuts
 for i in {1..10}; do alias "a$i"="awk '{ print $`echo ${i}` }'"; done

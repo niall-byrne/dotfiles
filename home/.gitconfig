@@ -2,3 +2,6 @@
 	path = ~/.gitconfig_global
 [core]
 	excludesfile = /Users/niall/.gitignore_global
+[user]
+	name = Niall Byrne
+	email = niall@sharedvisionsolutions.com
