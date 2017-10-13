@@ -5,10 +5,9 @@
 path_osx() {
     export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
     export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
-    export GOPATH=$HOME/Projects/golang
-    export GOROOT=
-    export GOBIN=$GOPATH/goland
-    export PATH=$PATH:$GOPATH/bin
+    export GOPATH=~/Projects/golang
+    export GOBIN=$GOPATH/bin
+    export PATH=$PATH:$GOBIN
 }
 
 path_linux() {
