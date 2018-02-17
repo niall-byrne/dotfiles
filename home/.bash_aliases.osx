@@ -5,6 +5,7 @@
 # Locations
 alias _="cd ~"
 alias _workspace="cd ~/workspace"
+alias _work="cd ~/workspace"
 alias _projects="cd ~/Projects"
 alias _Projects="cd ~/Projects"
 alias _homeshick="cd ~/.homesick/repos"

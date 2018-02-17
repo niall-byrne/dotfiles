@@ -112,23 +112,7 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-
 # Standard Bash Completion
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
-fi
-
-# Homebrew Bash Completion
-if [ -f `brew --prefix`/etc/bash_completion ]; then
-    . `brew --prefix`/etc/bash_completion
-fi
-
-# homeshick
-if [ -f "$HOME/.homesick/repos/homeshick/homeshick.sh" ]; then
-	source "$HOME/.homesick/repos/homeshick/homeshick.sh"
-fi
-
-# iterm
-if [ -e "${HOME}/.iterm2_shell_integration.bash" ]; then
-    source "${HOME}/.iterm2_shell_integration.bash"
 fi

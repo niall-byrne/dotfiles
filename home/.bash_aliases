@@ -14,7 +14,8 @@ alias v.profile="vi ~/.bash_profile"
 alias v.rc="vi ~/.bashrc"
 
 # Work
-alias l.vault=". ~/workspace/windscribe/devops-provisioning/docker/credentials"
+alias w.test="mosh work01-- tmux attach -t 2 -d"
+alias w.nexus="mosh work01-- tmux attach -t 0 -d"
 
 # File Utils
 alias f.clean="find . -name ".DS_Store"  -exec rm {} \;"
@@ -49,7 +50,7 @@ function d.rmi() {
 	docker rmi ${images}
 }
 
-function d.empty() {
+function d.clean() {
 	images="$(docker images | grep none | awk '{print $3}')"
 	[[ -z ${images} ]] && echo "No images to remove." && return 1
 	docker rmi ${images}
@@ -59,6 +60,18 @@ function d.stop() {
 	containers="$(docker ps -q)"
 	[[ -z ${containers} ]] && echo "No containers to stop." && return 1
         docker stop ${containers}
+}
+
+function d.kill() {
+	containers="$(docker ps -q)"
+	[[ -z ${containers} ]] && echo "No containers to stop." && return 1
+        docker kill ${containers}
+}
+
+# Molecule for Ansible
+
+function mole() {
+	molecule init role --role-name ${1} --driver-name vagrant --verifier-name testinfra
 }
 
 # Load Platform Specific Alias Files
