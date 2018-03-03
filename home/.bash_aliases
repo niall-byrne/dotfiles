@@ -72,7 +72,6 @@ function d.kill() {
 }
 
 # Molecule for Ansible
-
 function mole() {
 	molecule init role --role-name ${1} --driver-name vagrant --verifier-name testinfra
 }
