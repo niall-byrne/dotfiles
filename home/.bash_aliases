@@ -5,6 +5,9 @@
 # Networking
 alias n.online="ping -c 3 8.8.8.8"
 
+# Vagrant
+alias b.status='vagrant global-status'
+
 # Editing
 alias v.alias="vi ~/.bash_aliases"
 alias v.alias_osx="vi ~/.bash_aliases.osx"
