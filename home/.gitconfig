@@ -5,3 +5,5 @@
 [user]
 	name = Niall Byrne
 	email = niall@sharedvisionsolutions.com
+[alias]
+	up = pull --rebase --autostash
