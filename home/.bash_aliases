@@ -16,12 +16,8 @@ alias v.path="vi ~/.bash_path"
 alias v.profile="vi ~/.bash_profile"
 alias v.rc="vi ~/.bashrc"
 
-# Work
-alias w.test="mosh work01-- tmux attach -t 2 -d"
-alias w.nexus="mosh work01-- tmux attach -t 0 -d"
-
 # File Utils
-alias f.clean="find . -name ".DS_Store"  -exec rm {} \;"
+alias f.clean="find . -name '.DS_Store'  -exec rm {} \;"
 
 # Column Manipulation Shortcuts
 for i in {1..10}; do alias "a$i"="awk '{ print $`echo ${i}` }'"; done
@@ -69,11 +65,6 @@ function d.kill() {
 	containers="$(docker ps -q)"
 	[[ -z ${containers} ]] && echo "No containers to stop." && return 1
         docker kill ${containers}
-}
-
-# Molecule for Ansible
-function mole() {
-	molecule init role --role-name ${1} --driver-name vagrant --verifier-name testinfra
 }
 
 # Load Platform Specific Alias Files
