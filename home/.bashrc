@@ -22,7 +22,7 @@ if [ -f ~/.bash_path ]; then
     . ~/.bash_path
 fi
 
-# Optional compents for an SSH connect
+# Optional components for an SSH connect
 if [ "$SSH_CONNECTION" != "" ]; then
     tmux has-session && tmux attach
 fi
@@ -127,3 +127,4 @@ fi
 if [ -f $HOME/.kube/completion.bash.inc ]; then
     . "${HOME}/.kube/completion.bash.inc"
 fi
+
