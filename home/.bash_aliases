@@ -31,6 +31,13 @@ function trim() {
     echo -n "$var"
 }
 
+# SSL Shortcuts
+function s.date() {
+	PORT=${2:-443}	
+	HOST=${1}	
+	echo | openssl s_client -servername $HOST -connect $HOST:$PORT 2>/dev/null | openssl x509 -noout -dates
+}
+
 # Docker Shortcuts
 
 function d.quickey() {
@@ -60,6 +67,12 @@ function d.stop() {
 	[[ -z ${containers} ]] && echo "No containers to stop." && return 1
         docker stop ${containers}
 }
+
+
+function d.status() {
+        docker ps -a
+}
+
 
 function d.kill() {
 	containers="$(docker ps -q)"

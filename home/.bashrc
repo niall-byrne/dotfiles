@@ -128,3 +128,8 @@ if [ -f $HOME/.kube/completion.bash.inc ]; then
     . "${HOME}/.kube/completion.bash.inc"
 fi
 
+# pyenv Support
+[[ -d ~/.pyenv ]] && export PATH="${HOME}/.pyenv/bin:$PATH" && eval "$(pyenv init -)"
+
+# Openssl Fix for OSX
+export PATH="/usr/local/opt/openssl/bin:$PATH"
