@@ -117,15 +117,15 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
+# Custom Bash Completion Files
+if [ -d ~/.bash_completion ]; then
+ for f in ~/.bash_completion/*.bash; do source $f; done  
+fi
+
 # ASDF Support
 if [ -f ${HOME}/.asdf/asdf.sh ]; then
     . "${HOME}/.asdf/asdf.sh"
     . "${HOME}/.asdf/completions/asdf.bash"
-fi
-
-# Kubectl Support
-if [ -f $HOME/.kube/completion.bash.inc ]; then
-    . "${HOME}/.kube/completion.bash.inc"
 fi
 
 # pyenv Support
