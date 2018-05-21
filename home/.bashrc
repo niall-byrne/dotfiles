@@ -118,8 +118,8 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 # Custom Bash Completion Files
-if [ -d ~/.bash_completion ]; then
- for f in ~/.bash_completion/*.bash; do source $f; done  
+if [ -d ~/.bash_includes ]; then
+ for f in ~/.bash_includes/*.bash; do source $f; done  
 fi
 
 # ASDF Support
