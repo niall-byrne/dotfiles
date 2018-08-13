@@ -11,6 +11,15 @@ alias _Projects="cd ~/Projects"
 alias _homeshick="cd ~/.homesick/repos"
 alias _windscribe="cd ~/workspace/windscribe"
 alias _private="cd ~/workspace/private"
+alias __instant="cd ~/workspace/instant"
+
+# Go
+function g.linux() {
+	env GOOS=linux GOARCH=arm go build -v $1 
+}
+
+# Applications
+alias mate="/usr/local/bin/mate -w"
 
 # Finder
 alias f.show='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
@@ -24,6 +33,7 @@ alias p.mkvenv="python3.6 -m venv venv"
 alias p.serve="python -m SimpleHTTPServer"
 alias p.activate=". venv/bin/activate"
 alias p.uuid="python -c 'import uuid; print(uuid.uuid4())'"
+alias p.json="python -m json.tool"
 
 # Linux
 alias l.largest="du -a . | sort -n -r | head -n 5"
