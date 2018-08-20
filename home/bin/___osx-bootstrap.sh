@@ -10,7 +10,7 @@ brew cask install windscribe
 brew cask install keepassxc
 brew cask install skype
 brew cask install docker
-brew cask install tunnelblock
+brew cask install tunnelblick
 brew cask install skype
 brew cask install virtualbox
 brew cask install textmate
