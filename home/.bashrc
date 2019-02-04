@@ -122,12 +122,6 @@ if [ -d ~/.bash_includes ]; then
  for f in ~/.bash_includes/*.bash; do source $f; done  
 fi
 
-# ASDF Support
-if [ -f ${HOME}/.asdf/asdf.sh ]; then
-    . "${HOME}/.asdf/asdf.sh"
-    . "${HOME}/.asdf/completions/asdf.bash"
-fi
-
 # pyenv Support
 [[ -d ~/.pyenv ]] && export PATH="${HOME}/.pyenv/bin:$PATH" && eval "$(pyenv init -)"
 
