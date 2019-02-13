@@ -73,3 +73,12 @@ function k.gen() {
         [[ ! -d ${HOME}/.ssh ]] && mkdir -p ${HOME}/.ssh
 	ssh-keygen -f "${HOME}/.ssh/$1"
 }
+
+genpass() {
+	chars=${1:-20}
+	echo "$(env LC_CTYPE=C tr -dc "a-zA-Z0-9" < /dev/urandom | head -c ${chars})"
+}
+
+mkpasswd() {
+	python -c "from passlib.hash import sha512_crypt; import getpass,string,random; print sha512_crypt.using(salt=''.join([random.choice(string.ascii_letters + string.digits) for _ in range(16)]),rounds=5000).hash(getpass.getpass())"
+}
