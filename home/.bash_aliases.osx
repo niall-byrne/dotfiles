@@ -35,6 +35,9 @@ alias p.activate=". venv/bin/activate"
 alias p.uuid="python -c 'import uuid; print(uuid.uuid4())'"
 alias p.json="python -m json.tool"
 
+# API Design
+alias swagger="docker run --rm -d -p 90:8080 --name swagger swaggerapi/swagger-editor"
+
 # Linux
 alias l.largest="du -a . | sort -n -r | head -n 5"
 alias l.listen="lsof | grep LISTEN"
@@ -79,6 +82,3 @@ genpass() {
 	echo "$(env LC_CTYPE=C tr -dc "a-zA-Z0-9" < /dev/urandom | head -c ${chars})"
 }
 
-mkpasswd() {
-	python -c "from passlib.hash import sha512_crypt; import getpass,string,random; print sha512_crypt.using(salt=''.join([random.choice(string.ascii_letters + string.digits) for _ in range(16)]),rounds=5000).hash(getpass.getpass())"
-}

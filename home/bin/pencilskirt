@@ -1,0 +1,3 @@
+pushd /Volumes/KB/kubernetes
+. slacks.sh
+popd
