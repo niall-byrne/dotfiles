@@ -1,9 +1,11 @@
+#!/bin/bash
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
 # Detect Platform on Login
-PLATFORM=$(uname -s):$(uname -m)
+PLATFORM="$(uname -s):$(uname -m)"
 
 # Setup Git
 git config --global core.excludesfile ~/.gitignore_global
@@ -18,12 +20,12 @@ git config --global core.excludesfile ~/.gitignore_global
 [ -z "$PS1" ] && return
 
 # Additional path appends
-if [ -f ~/.bash_path ]; then
+if [[ -f ~/.bash_path ]]; then
     . ~/.bash_path
 fi
 
 # Optional components for an SSH connect
-if [ "$SSH_CONNECTION" != "" ]; then
+if [[ -n "$SSH_CONNECTION" ]]; then
     tmux has-session && tmux attach
 fi
 
@@ -43,10 +45,10 @@ HISTFILESIZE=2000
 shopt -s checkwinsize
 
 # make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+[[ -x /usr/bin/lesspipe ]] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
+if [[ -z "$debian_chroot" ]] && [[ -r /etc/debian_chroot ]]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
@@ -60,8 +62,8 @@ esac
 # should be on the output of commands, not on the prompt
 force_color_prompt=yes
 
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+if [[ -n "$force_color_prompt" ]]; then
+    if [[ -x /usr/bin/tput ]] && tput setaf 1 >&/dev/null; then
 	# We have color support; assume it's compliant with Ecma-48
 	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
 	# a case would tend to support setf rather than setaf.)
@@ -71,7 +73,7 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-if [ "$color_prompt" = yes ]; then
+if [[ "$color_prompt" = yes ]]; then
     PS1='${git_branch}${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
     PS1='${git_branch}${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
@@ -88,11 +90,9 @@ xterm*|rxvt*)
 esac
 
 # enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
+if [[ -x /usr/bin/dircolors ]]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
@@ -108,17 +108,17 @@ alias l='ls -CF'
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # Alias definitions.
-if [ -f ~/.bash_aliases ]; then
+if [[ -f ~/.bash_aliases ]]; then
     . ~/.bash_aliases
 fi
 
 # Standard Bash Completion
-if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+if [[ -f /etc/bash_completion ]] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
 # Custom Bash Completion Files
-if [ -d ~/.bash_includes ]; then
+if [[ -d ~/.bash_includes ]]; then
  for f in ~/.bash_includes/*.bash; do source $f; done  
 fi
 
@@ -129,12 +129,27 @@ fi
 export PATH="/usr/local/opt/openssl/bin:$PATH"
 
 # ASDF
-if [ -f $HOME/.asdf/asdf.sh ]; then
-    . $HOME/.asdf/asdf.sh
+if [[ -f "${HOME}/.asdf/asdf.sh" ]]; then
+    . "${HOME}/.asdf/asdf.sh"
 fi
-if [ -f $HOME/.asdf/completions/asdf.bash ]; then
-    . $HOME/.asdf/completions/asdf.bash
+if [[ -f "$HOME/.asdf/completions/asdf.bash" ]]; then
+    . "$HOME/.asdf/completions/asdf.bash"
 fi
 
-${HOME}/bin/marathon.py
+# Homeshick
+if [[ -f "${HOME}/.homesick/repos/homeshick/homeshick.sh" ]]; then
+    . "${HOME}/.homesick/repos/homeshick/homeshick.sh"
+fi
+if [[ -f "${HOME}/.homesick/repos/homeshick/completions/homeshick-completion.bash" ]]; then
+    . "${HOME}/.homesick/repos/homeshick/completions/homeshick-completion.bash"
+fi
+
+# Custom Scripts
+if [[ -f "${HOME}/bin/marathon.py" ]]; then
+    ${HOME}/bin/marathon.py
+fi
+if command -v weather; then
+    weather -city toronto -appid 43787c792001977957121d7a7d952674
+fi
+
 
