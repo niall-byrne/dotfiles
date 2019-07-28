@@ -1,6 +1,11 @@
+#!/bin/bash
+
 # ----------------------------------------------------------------
 # OSX Specific Aliases
 # ----------------------------------------------------------------
+
+# shellcheck disable=SC1090
+# shellcheck disable=SC2154
 
 # Locations
 alias _="cd ~"
@@ -13,9 +18,13 @@ alias _windscribe="cd ~/workspace/windscribe"
 alias _private="cd ~/workspace/private"
 alias __instant="cd ~/workspace/instant"
 
+# GCP
+alias gcloud="CLOUDSDK_PYTHON=/Users/niall/.asdf/shims/python gcloud"
+alias kc=kubectl
+
 # Go
 function g.linux() {
-	env GOOS=linux GOARCH=arm go build -v $1 
+	env GOOS=linux GOARCH=arm go build -v "$1"
 }
 
 # Applications
@@ -51,34 +60,19 @@ function ii()   # Get current host related info.
 
     env_colors
 
-    source ${HOME}/bin/localAddress.sh
+    source "${HOME}/bin/localAddress.sh"
     UPTIME=$(uptime)
 
     echo -e "${BRed}Hostname:$NC" && hostname
     echo -e "${BRed}Kernel:$NC" && uname -a
     echo -e "${BRed}Users logged on:$NC " && who | awk '{ print $1 }' | sort --unique
     echo -e "${BRed}Current date :$NC " && date
-    echo -e "${BRed}Uptime :$NC " && trim ${UPTIME} && echo
-    echo -e "${BRed}Diskspace :$NC " && df -h | grep disk
+    echo -e "${BRed}Uptime :$NC " && trim "${UPTIME}" && echo
+    echo -e "${BRed}Diskspace :$NC " && df -h | grep disk | grep -v TimeMachine | awk '{print $1 "\t" $5 "\t" $9}'
     echo -e "${BRed}Local IP Address :$NC" && echo "${PRIVATE_IP}"
-    echo -e "${BRed}Public IP Address :$NC" && echo "$(dig TXT +short o-o.myaddr.l.google.com @ns1.google.com | sed 's/"//g')"
+    echo -e "${BRed}Public IP Address :$NC" && dig TXT +short o-o.myaddr.l.google.com @ns1.google.com | sed 's/"//g'
     echo -e "${BRed}Network connections :$NC "
-    echo -e "Established Connections:  $(netstat -np tcp | grep -v unix | grep ESTABLISHED | wc -l)"
-    echo -e "Listeners for Connectons: $(netstat -anp tcp  | grep -v unix | grep LISTEN | wc -l)"
+    echo -e "Established Connections:  $(netstat -np tcp | grep -v unix | grep -c ESTABLISHED)"
+    echo -e "Listeners for Connectons: $(netstat -anp tcp  | grep -v unix | grep -c LISTEN)"
     echo
 }
-
-
-# Security Shortcuts
-
-function k.gen() {
-	[[ -z $1 ]] && echo "Specify a target filename." && return 1
-        [[ ! -d ${HOME}/.ssh ]] && mkdir -p ${HOME}/.ssh
-	ssh-keygen -f "${HOME}/.ssh/$1"
-}
-
-genpass() {
-	chars=${1:-20}
-	echo "$(env LC_CTYPE=C tr -dc "a-zA-Z0-9" < /dev/urandom | head -c ${chars})"
-}
-

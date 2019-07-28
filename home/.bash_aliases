@@ -1,6 +1,10 @@
+#!/bin/bash
+
 # ----------------------------------------------------------------
 # Bash Aliases - Cross Platform Aliases and Source Logic
 # ----------------------------------------------------------------
+
+# shellcheck disable=SC1090
 
 # Networking
 alias n.online="ping -c 3 8.8.8.8"
@@ -20,7 +24,11 @@ alias v.rc="vi ~/.bashrc"
 alias f.clean="find . -name '.DS_Store'  -exec rm {} \;"
 
 # Column Manipulation Shortcuts
+# shellcheck disable=SC2139
+# shellcheck disable=SC2140
 for i in {1..10}; do alias "a$i"="awk '{ print $`echo ${i}` }'"; done
+# shellcheck disable=SC2139
+# shellcheck disable=SC2140
 for i in {1..10}; do alias "c$i"="cut -d, -f`echo ${i}`"; done
 
 # White Space Remover
@@ -81,7 +89,7 @@ function d.kill() {
 }
 
 # Load Platform Specific Alias Files
-case ${PLATFORM} in
+case "${PLATFORM}" in
 *Darwin*)
     [[ -f ~/.bash_aliases.osx ]] && source ~/.bash_aliases.osx
     ;;
@@ -93,20 +101,16 @@ case ${PLATFORM} in
     ;;
 esac
 
-function instant_tmux() {
-   tmux new -s instant
-   
-   tmux new-window -t instant "ssh byrnen@redshift-bridge.adm.beinstant.net" 
-   tmux rename-window -t instant:1 redshift-bridge
+# Security Shortcuts
 
-
+function k.gen() {
+	[[ -z $1 ]] && echo "Specify a target filename." && return 1
+        [[ ! -d ${HOME}/.ssh ]] && mkdir -p "${HOME}/.ssh"
+	ssh-keygen -f "${HOME}/.ssh/$1"
 }
 
-alias push-ansible-mgmt='./pushAnsible.sh byrnen mgmt2.mgmt.beinstant.net'
-alias push-ansible-dev='./pushAnsible.sh byrnen mgmt-dev.mgmt.beinstant.net'
-alias vault-ansible-prd='ansible/scripts/vault.sh ansible/group_vars/tag_env_prd/vault'
-alias vault-ansible-adm='ansible/scripts/vault.sh ansible/group_vars/tag_env_adm/vault'
-alias vault-ansible-dev='ansible/scripts/vault.sh ansible/group_vars/tag_env_dev/vault'
-alias vault-ansible-win='ansible/scripts/vault.sh ansible/group_vars/tag_platform_windows/vault'
 
-alias kc=kubectl
+genpass() {
+	chars=${1:-20}
+	env LC_CTYPE=C tr -dc "a-zA-Z0-9" < /dev/urandom | head -c "${chars}"
+}

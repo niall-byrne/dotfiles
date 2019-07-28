@@ -4,6 +4,11 @@
 	excludesfile = /Users/niall/.gitignore_global
 [user]
 	name = Niall Byrne
-	email = niall@sharedvisionsolutions.com
+	email = niall@niallbyrne.ca
 [alias]
 	up = pull --rebase --autostash
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f

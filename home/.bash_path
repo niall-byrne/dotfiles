@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # ----------------------------------------------------------------
 # Bash Exported Environment Variables
 # ----------------------------------------------------------------
@@ -25,9 +27,3 @@ case ${PLATFORM} in
   echo "WARNING: Cannot set path for this unknown platform."
   ;;
 esac
-
-
-
-
-
-

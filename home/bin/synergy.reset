@@ -1,4 +1,0 @@
-launchctl unload /Library/LaunchAgents/com.symless.synergy.synergy-service.plist
-sudo killall synergy-core
-launchctl load /Library/LaunchAgents/com.symless.synergy.synergy-service.plist
-

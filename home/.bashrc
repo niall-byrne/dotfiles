@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# shellcheck disable=SC1090
+# shellcheck disable=SC2034
+# shellcheck disable=SC2154
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -17,7 +21,7 @@ git config --global core.excludesfile ~/.gitignore_global
 [[ -f ~/.bash_git_support ]] && source ~/.bash_git_support
 
 # If not running interactively, don't do anything
-[ -z "$PS1" ] && return
+[[ -z "$PS1" ]] && return
 
 # Additional path appends
 if [[ -f ~/.bash_path ]]; then
@@ -148,7 +152,7 @@ fi
 if [[ -f "${HOME}/bin/marathon.py" ]]; then
     ${HOME}/bin/marathon.py
 fi
-if command -v weather; then
+if [[ -f "${HOME}/bin/weather" ]]; then
     weather -city toronto -appid 43787c792001977957121d7a7d952674
 fi
 

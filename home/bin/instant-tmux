@@ -1,7 +1,0 @@
-tmux new -s instant
-
-tmux new-window -t instant "ssh byrnen@redshift-bridge.adm.beinstant.net" "redshift"
-tmux rename-window -t instant:1 redshift-bridge
-
-
-

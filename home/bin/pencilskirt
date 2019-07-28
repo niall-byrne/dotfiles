@@ -1,3 +1,6 @@
-pushd /Volumes/KB/kubernetes
+#!/bin/bash
+
+pushd /Volumes/KB/kubernetes || exit
 . slacks.sh
-popd
+popd || exit
+

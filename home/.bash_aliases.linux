@@ -1,6 +1,11 @@
+#!/bin/bash
+
 # ----------------------------------------------------------------
 # OSX Specific Aliases
 # ----------------------------------------------------------------
+
+# shellcheck disable=SC1090
+# shellcheck disable=SC2154
 
 # Locations
 alias _="cd ~"
@@ -27,27 +32,19 @@ function ii()   # Get current host related info.
 
     env_colors
 
-    source ${HOME}/bin/localAddress.sh
+    source "${HOME}/bin/localAddress.sh"
     UPTIME=$(uptime)
 
     echo -e "${BRed}Hostname:$NC" && hostname
     echo -e "${BRed}Kernel:$NC" && uname -a
     echo -e "${BRed}Users logged on:$NC " && who | awk '{ print $1 }' | sort --unique
     echo -e "${BRed}Current date :$NC " && date
-    echo -e "${BRed}Uptime :$NC " && trim ${UPTIME} && echo
-    echo -e "${BRed}Diskspace :$NC " && df -h | egrep --color=never '^/dev/[a-z]{1}d[a-z]{1}[0-9]{1}'
+    echo -e "${BRed}Uptime :$NC " && trim "${UPTIME}" && echo
+    echo -e "${BRed}Diskspace :$NC " && df -h | grep -e --color=never '^/dev/[a-z]{1}d[a-z]{1}[0-9]{1}'
     echo -e "${BRed}Local IP Address :$NC" && echo "${PRIVATE_IP}"
-    echo -e "${BRed}Public IP Address :$NC" && echo "$(dig +short myip.opendns.com @resolver1.opendns.com)"
+    echo -e "${BRed}Public IP Address :$NC" && dig +short myip.opendns.com @resolver1.opendns.com
     echo -e "${BRed}Network connections :$NC "
-    echo -e "Established Connections:  $(netstat -np ntcp 2>/dev/null | grep -v unix | grep ESTABLISHED | wc -l)"
-    echo -e "Listeners for Connectons: $(netstat -np ntcp 2>/dev/null | grep -v unix | grep LISTEN | wc -l)"
+    echo -e "Established Connections:  $(netstat -np ntcp 2>/dev/null | grep -v unix | grep -c ESTABLISHED)"
+    echo -e "Listeners for Connectons: $(netstat -np ntcp 2>/dev/null | grep -v unix | grep -c LISTEN)"
     echo
-}
-
-# Security Shortcuts
-
-function k.gen() {
-	[[ -z $1 ]] && echo "Specify a target filename." && return 1
-        [[ ! -d ${HOME}/.ssh ]] && mkdir -p ${HOME}/.ssh
-	ssh-keygen -f "${HOME}/.ssh/$1"
 }
