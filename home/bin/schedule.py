@@ -5,7 +5,7 @@ data_set = {
         "week": 21
     },
     2: {
-        "long": 20,
+        "long": 10,
         "runs": 4,
         "week": 25
     },
@@ -35,17 +35,17 @@ data_set = {
         "week": 22
     },
     8: {
-        "long": 8,
-        "runs": 4,
-        "week": 21
-    },
-    9: {
         "long": 14,
         "runs": 4,
         "week": 33
     },
+    9: {
+        "long": 16,
+        "runs": 4,
+        "week": 35
+    },
     10: {
-        "long": 8,
+        "long": 18,
         "runs": 4,
         "week": 37
     },

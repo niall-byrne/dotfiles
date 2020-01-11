@@ -9,7 +9,7 @@ NOW = datetime.datetime.now()
 
 def get_weeks():
     marathon_week = MARATHON.isocalendar()[1]
-    current_week = NOW.isocalendar()[1]
+    current_week = NOW.isocalendar()[1] - 2
     if current_week > marathon_week:
         return marathon_week, 0
     return marathon_week, current_week
@@ -48,6 +48,8 @@ def main():
           training_start.strftime('%Y-%m-%d'))
     print("Days Until Marathon: %s" % (MARATHON - NOW).days)
     print("Weeks Until Marathon: %s" % (marathon_week - current_week))
+
+    print("\nTHIS IS TRAINING WEEK: %s" % current_week)
     overview(current_week + 0, current_week)
     overview(current_week + 1, current_week)
 
