@@ -1,7 +1,7 @@
 [include]
 	path = ~/.gitconfig_global
 [core]
-	excludesfile = /Users/niall/.gitignore_global
+	excludesfile = /Users/nbyrne/.gitignore_global
 [user]
 	name = Niall Byrne
 	email = niall@niallbyrne.ca

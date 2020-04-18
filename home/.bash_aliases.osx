@@ -19,7 +19,7 @@ alias _private="cd ~/workspace/private"
 alias __instant="cd ~/workspace/instant"
 
 # GCP
-alias gcloud="CLOUDSDK_PYTHON=/Users/niall/.asdf/shims/python gcloud"
+alias gcloud="CLOUDSDK_PYTHON=${HOME}/.asdf/shims/python gcloud"
 alias kc=kubectl
 
 # Go

@@ -6,6 +6,9 @@
 
 # shellcheck disable=SC1090
 
+# Lazy Git
+alias gg="lazygit"
+
 # Networking
 alias n.online="ping -c 3 8.8.8.8"
 

@@ -14,10 +14,11 @@ alias _="cd ~"
 alias k.add="ssh-add -K"
 
 # Python
-alias p.mkvenv="python3.6 -m venv venv"
+alias p.mkvenv="python3 -m venv venv"
 alias p.serve="python -m SimpleHTTPServer"
 alias p.activate=". venv/bin/activate"
 alias p.uuid="python -c 'import uuid; print(uuid.uuid4())'"
+alias p.json="python -m json.tool"
 
 # Linux
 alias l.largest="du -a . | sort -n -r | head -n 5"
