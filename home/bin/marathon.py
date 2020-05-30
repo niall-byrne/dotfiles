@@ -3,16 +3,16 @@
 import datetime
 import schedule
 
-MARATHON = datetime.datetime(2020, 5, 3, 9, 00, 00, 00)
+MARATHON = datetime.datetime(2020, 9, 20, 9, 00, 00, 00)
 NOW = datetime.datetime.now()
 
 
 def get_weeks():
-    marathon_week = MARATHON.isocalendar()[1]
-    current_week = NOW.isocalendar()[1] - 2
+    marathon_week = int(MARATHON.strftime("%W"))
+    current_week = int(NOW.strftime("%W"))
     if current_week > marathon_week:
         return marathon_week, 0
-    return marathon_week, current_week
+    return marathon_week, 16 - (marathon_week - current_week)
 
 
 def miles_to_km(miles):
@@ -20,7 +20,7 @@ def miles_to_km(miles):
 
 
 def overview(target_week, current_week):
-    if 0 < target_week < 16:
+    if 0 < target_week < 17:
         if target_week == 1:
             target_name = "First Week"
         elif target_week == current_week + 1:
@@ -31,7 +31,7 @@ def overview(target_week, current_week):
             target_name = "Week %s" % target_week
 
         if target_week in schedule.data_set:
-            data = schedule.data_set[target_week]
+            data = dict(schedule.data_set[target_week])
             for key, value in data.items():
                 if key != 'runs':
                     data[key] = miles_to_km(value)
@@ -47,7 +47,6 @@ def main():
     print("Official Training Start Date: %s" %
           training_start.strftime('%Y-%m-%d'))
     print("Days Until Marathon: %s" % (MARATHON - NOW).days)
-    print("Weeks Until Marathon: %s" % (marathon_week - current_week))
 
     print("\nTHIS IS TRAINING WEEK: %s" % current_week)
     overview(current_week + 0, current_week)
