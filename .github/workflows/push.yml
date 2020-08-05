@@ -1,0 +1,27 @@
+name: Dotfiles Automation
+
+on:
+  push:
+  schedule:
+    - cron:  '0 6 * * 1'
+
+
+jobs:
+
+  dotfiles:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-python@v2
+      with:
+        python-version: '3.7'
+        architecture: 'x64'
+    - name: run shellcheck
+      run: |
+        shellcheck home/bin/conf
+        shellcheck home/bin/decrypt.sh
+        shellcheck home/bin/encrypt.sh
+        shellcheck home/bin/yapf-loader
+    - name: test python scripts
+      run: |
+        cd home/bin/marathon && python -m unittest marathon_test.py

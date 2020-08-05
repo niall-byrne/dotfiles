@@ -5,12 +5,10 @@
 case $1 in
   python)
     echo "Configuring python ..."
-    pip install -r "${HOME}/bin/requirements.txt"
+    pip install -r "${HOME}/.python_config/requirements.txt"
     asdf reshim
     ;;
   *)
    echo "Cannot configure that..."
    ;;
 esac
-
-
