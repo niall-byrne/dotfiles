@@ -23,10 +23,12 @@ env_osx() {
     fi
 
     if [[ -f '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc' ]]; then
+        # shellcheck disable=SC1091
         source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc'
     fi
 
     if [[ -e '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc' ]]; then
+        # shellcheck disable=SC1091
         source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc'
     fi
 

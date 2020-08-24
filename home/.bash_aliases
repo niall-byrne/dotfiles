@@ -27,12 +27,10 @@ alias v.rc="vi ~/.bashrc"
 alias f.clean="find . -name '.DS_Store'  -exec rm {} \;"
 
 # Column Manipulation Shortcuts
-# shellcheck disable=SC2139
-# shellcheck disable=SC2140
-for i in {1..10}; do alias "a$i"="awk '{ print $`echo ${i}` }'"; done
-# shellcheck disable=SC2139
-# shellcheck disable=SC2140
-for i in {1..10}; do alias "c$i"="cut -d, -f`echo ${i}`"; done
+# shellcheck disable=SC2139,SC2140
+for i in {1..10}; do alias "a${i}"="awk '{ print \$${i} }'"; done
+# shellcheck disable=SC2139,SC2140
+for i in {1..10}; do alias "c${i}"="cut -d, -f ${i}"; done
 
 # White Space Remover
 function trim() {
@@ -46,37 +44,37 @@ function trim() {
 function s.date() {
 	PORT=${2:-443}	
 	HOST=${1}	
-	echo | openssl s_client -servername $HOST -connect $HOST:$PORT 2>/dev/null | openssl x509 -noout -dates
+	echo | openssl s_client -servername "${HOST}" -connect "${HOST}":"${PORT}" 2>/dev/null | openssl x509 -noout -dates
 }
 
 # Docker Shortcuts
 
 function d.quickey() {
-	docker run -it --name quickey $1 sh
+	docker run -it --name quickey "${1}" sh
 }
 
 function d.rm() {
 	containers="$(docker ps -qa)"
 	[[ -z ${containers} ]] && echo "No containers to remove." && return 1
-	docker rm ${containers}
+	docker rm "${containers}"
 }
 
 function d.rmi() {
 	images="$(docker images -q)"
 	[[ -z ${images} ]] && echo "No images to remove." && return 1
-	docker rmi ${images}
+	docker rmi "${images}"
 }
 
 function d.clean() {
 	images="$(docker images | grep none | awk '{print $3}')"
 	[[ -z ${images} ]] && echo "No images to remove." && return 1
-	docker rmi ${images}
+	docker rmi "${images}"
 }
 
 function d.stop() {
 	containers="$(docker ps -q)"
 	[[ -z ${containers} ]] && echo "No containers to stop." && return 1
-        docker stop ${containers}
+        docker stop "${containers}"
 }
 
 
@@ -88,7 +86,7 @@ function d.status() {
 function d.kill() {
 	containers="$(docker ps -q)"
 	[[ -z ${containers} ]] && echo "No containers to stop." && return 1
-        docker kill ${containers}
+        docker kill "${containers}"
 }
 
 # Load Platform Specific Alias Files

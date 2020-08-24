@@ -95,7 +95,11 @@ esac
 
 # enable color support of ls and also add handy aliases
 if [[ -x /usr/bin/dircolors ]]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    if [[ -r ~/.dircolor ]]; then
+      eval "$(dircolors -b ~/.dircolors)"
+    else
+      eval "$(dircolors -b)"
+    fi
     alias ls='ls --color=auto'
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
@@ -118,12 +122,13 @@ fi
 
 # Standard Bash Completion
 if [[ -f /etc/bash_completion ]] && ! shopt -oq posix; then
+    # shellcheck disable=SC1091
     . /etc/bash_completion
 fi
 
 # Custom Bash Completion Files
 if [[ -d ~/.bash_includes ]]; then
- for f in ~/.bash_includes/*.bash; do source $f; done  
+ for f in ~/.bash_includes/*.bash; do source "$f"; done
 fi
 
 # pyenv Support
@@ -148,9 +153,15 @@ if [[ -f "${HOME}/.homesick/repos/homeshick/completions/homeshick-completion.bas
     . "${HOME}/.homesick/repos/homeshick/completions/homeshick-completion.bash"
 fi
 
+# Travis CI
+if [[ ! -s /Users/nbyrne/.travis/travis.sh ]]; then
+  # shellcheck disable=SC1091
+  source /Users/nbyrne/.travis/travis.sh
+fi
+
 # Custom Scripts
 if [[ -f "${HOME}/bin/marathon/marathon.py" ]]; then
-    ${HOME}/bin/marathon/marathon.py
+    "${HOME}/bin/marathon/marathon.py"
 fi
 
 if [[ -f "${HOME}/bin/weather" ]]; then

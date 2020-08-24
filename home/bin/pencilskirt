@@ -1,8 +1,0 @@
-#!/bin/bash
-
-# Loads Kubernetes Configuration
-
-pushd /Volumes/KB/kubernetes || exit
-. slacks.sh
-popd || exit
-

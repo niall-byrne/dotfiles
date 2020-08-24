@@ -5,7 +5,6 @@ on:
   schedule:
     - cron:  '0 6 * * 1'
 
-
 jobs:
 
   dotfiles:
@@ -18,10 +17,16 @@ jobs:
         architecture: 'x64'
     - name: run shellcheck
       run: |
-        shellcheck home/bin/conf
-        shellcheck home/bin/decrypt.sh
-        shellcheck home/bin/encrypt.sh
-        shellcheck home/bin/yapf-loader
+        cd home
+        for f in .bash*; do [[ -f $f ]] && shellcheck -x "$f"; done
+        for f in $(grep -lR "#\!/bin/bash" bin); do [[ -f $f ]] && shellcheck -x "$f"; done
     - name: test python scripts
       run: |
         cd home/bin/marathon && python -m unittest marathon_test.py
+    - name: Report Job Status
+      if: always()
+      run: |
+        if [[ $status == "failure" ]]; then curl -X POST -H 'Content-type: application/json' --data '{"text":"dotfiles: build has failed!"}' "${WEBHOOK_URL}"; fi
+      env:
+        status: ${{job.status}}
+        WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
