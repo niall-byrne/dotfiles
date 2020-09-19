@@ -3,7 +3,7 @@
 import datetime
 import schedule
 
-MARATHON = datetime.datetime(2020, 10, 11, 9, 00, 00, 00)
+MARATHON = datetime.datetime(2020, 10, 18, 9, 00, 00, 00)
 NOW = datetime.datetime.now()
 
 
