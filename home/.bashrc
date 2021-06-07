@@ -153,11 +153,6 @@ if [[ -f "${HOME}/.homesick/repos/homeshick/completions/homeshick-completion.bas
     . "${HOME}/.homesick/repos/homeshick/completions/homeshick-completion.bash"
 fi
 
-# Travis CI
-if [[ ! -s /Users/nbyrne/.travis/travis.sh ]]; then
-  # shellcheck disable=SC1091
-  source /Users/nbyrne/.travis/travis.sh
-fi
 
 # Custom Scripts
 if [[ -f "${HOME}/bin/marathon/marathon.py" ]]; then
