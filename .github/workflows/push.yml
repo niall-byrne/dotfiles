@@ -18,8 +18,8 @@ jobs:
     - name: run shellcheck
       run: |
         cd home
-        for f in .bash*; do [[ -f $f ]] && shellcheck -x "$f"; done
-        for f in $(grep -lR "#\!/bin/bash" bin); do [[ -f $f ]] && shellcheck -x "$f"; done
+        shellcheck .bash*[^includes] -x
+        shellcheck $(grep -lR "#\!/bin/bash" bin)
     - name: test python scripts
       run: |
         cd home/bin/marathon && python -m unittest marathon_test.py

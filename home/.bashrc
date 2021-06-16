@@ -139,17 +139,21 @@ export PATH="/usr/local/opt/openssl/bin:$PATH"
 
 # ASDF
 if [[ -f "${HOME}/.asdf/asdf.sh" ]]; then
+    # shellcheck disable=SC1091
     . "${HOME}/.asdf/asdf.sh"
 fi
 if [[ -f "$HOME/.asdf/completions/asdf.bash" ]]; then
+    # shellcheck disable=SC1091
     . "$HOME/.asdf/completions/asdf.bash"
 fi
 
 # Homeshick
 if [[ -f "${HOME}/.homesick/repos/homeshick/homeshick.sh" ]]; then
+    # shellcheck disable=SC1091
     . "${HOME}/.homesick/repos/homeshick/homeshick.sh"
 fi
 if [[ -f "${HOME}/.homesick/repos/homeshick/completions/homeshick-completion.bash" ]]; then
+    # shellcheck disable=SC1091
     . "${HOME}/.homesick/repos/homeshick/completions/homeshick-completion.bash"
 fi
 

@@ -19,6 +19,7 @@ env_osx() {
 
     # iterm
     if [ -f "${HOME}/.iterm2_shell_integration.bash" ]; then
+        # shellcheck disable=SC1091
         source "${HOME}/.iterm2_shell_integration.bash"
     fi
 
@@ -33,6 +34,7 @@ env_osx() {
     fi
 
     if [ -f "$(brew --prefix)/etc/bash_completion" ]; then
+        # shellcheck disable=SC1091
         source "$(brew --prefix)/etc/bash_completion"
     fi
 

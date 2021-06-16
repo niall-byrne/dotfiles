@@ -54,39 +54,49 @@ function d.quickey() {
 }
 
 function d.rm() {
-	containers="$(docker ps -qa)"
-	[[ -z ${containers} ]] && echo "No containers to remove." && return 1
-	docker rm "${containers}"
+	containers=$(docker ps -qa)
+	[[ -z "${containers[*]}" ]] && echo "No containers to remove." && return 1
+	docker rm "${containers[*]}"
 }
 
 function d.rmi() {
-	images="$(docker images -q)"
-	[[ -z ${images} ]] && echo "No images to remove." && return 1
-	docker rmi "${images}"
+  images=$(docker images -q)
+	[[ -z "${images[*]}" ]] && echo "No images to remove." && return 1
+	docker rmi "${images[*]}"
 }
 
 function d.clean() {
-	images="$(docker images | grep none | awk '{print $3}')"
-	[[ -z ${images} ]] && echo "No images to remove." && return 1
-	docker rmi "${images}"
+  IFS=$'\n' read -r -a images <<< "$(
+    docker images | grep none | awk '{print $3}'
+  )"
+	[[ -z "${images[*]}" ]] && echo "No images to remove." && return 1
+	docker rmi "${images[*]}"
 }
 
 function d.stop() {
-	containers="$(docker ps -q)"
-	[[ -z ${containers} ]] && echo "No containers to stop." && return 1
-        docker stop "${containers}"
+	containers=$(docker ps -q)
+	[[ -z "${containers}" ]] && echo "No containers to stop." && return 1
+  docker stop "${containers}"
+}
+
+function d.start() {
+  containers=$(docker ps -qa)
+	[[ -z "${containers}" ]] && echo "No containers to stop." && return 1
+  docker start "${containers}"
 }
 
 
 function d.status() {
-        docker ps -a
+  docker ps -a
 }
 
 
 function d.kill() {
-	containers="$(docker ps -q)"
-	[[ -z ${containers} ]] && echo "No containers to stop." && return 1
-        docker kill "${containers}"
+	IFS=$'\n' read -r -a containers <<< "$(
+    docker ps -q
+  )"
+	[[ -z "${containers[*]}" ]] && echo "No containers to stop." && return 1
+  docker kill "${containers[*]}"
 }
 
 # Load Platform Specific Alias Files
